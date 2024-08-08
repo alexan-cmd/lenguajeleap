@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Sign-In</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+</head>
+<body>
+    <button id="google-signin-button">Sign in with Google</button>
+    <script>
+        // Configura Firebase
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Configura Google Sign-In
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        document.getElementById('google-signin-button').addEventListener('click', () => {
+            firebase.auth().signInWithPopup(provider)
+                .then((result) => {
+                    const user = result.user;
+                    console.log("User signed in: ", user);
+                })
+                .catch((error) => {
+                    console.error("Error signing in: ", error);
+                });
+        });
+    </script>
+</body>
+</html>
